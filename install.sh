@@ -1,12 +1,8 @@
 #!/bin/bash
 
-if [[ -n "$BASH_VERSION" ]]; then
-  cat cligpt.zsh >> ~/.bashrc
-elif [ -n "$ZSH_VERSION" ]; then
-  cat cligpt.zsh >> ~/.zshrc
-else
-  echo "Install unsuccessful. Shell is not supported."
-  return 1
-fi
+INSTALLER=$(realpath "$0")
+CLIGPT=$(dirname "$INSTALLER")/cligpt
 
-echo "Installed. Reload your shell to use cligpt, and make sure you have the OPENAI_API_KEY environment variable set."
+CLIGPT_TARGET_DIR=$HOME/.local/bin
+mkdir -p $CLIGPT_TARGET_DIR
+ln -s  $CLIGPT $CLIGPT_TARGET_DIR
